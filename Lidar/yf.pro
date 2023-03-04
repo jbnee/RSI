@@ -1,0 +1,3 @@
+FUNCTION YF, X
+  RETURN, X^3 + 2.0 * X^2-5.0
+end

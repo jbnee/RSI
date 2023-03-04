@@ -1,0 +1,3 @@
+FUNCTION XF, X
+return, X^3- 2.0
+END

@@ -1,0 +1,68 @@
+Pro Plot_LIDAR
+;;;;;FIRST PART NORMALIZATION M/D SIGNALS
+
+PRINT,'FIRST,GET NORMALIZATION CONSTANT FBK '
+CLOSE,/ALL
+;device, decomposed=0
+loadct, 5
+
+
+!p.multi=[0,1,2]
+
+ P1 = [0.1,0.15,0.93,0.49]; plot_position=[0.1,0.15,0.95,0.45]
+ P2 = [0.1,0.6,0.93,0.95]; plot_position2=[0.1,0.6,0.95,0.95]
+DNM=''
+READ,DNM,PROMPT=' INPUT FILE NAME FE262004: '
+
+ Dpath='F:\Lidar_DATA\NO30\'
+
+
+ read,R1,L1,prompt='RAW 20,LENGTH 1000 AS 20,1000'
+
+
+  DATA1=findgen(R1,L1)
+ BIN1=0.024  ;BINSIZE 24 METERS
+
+  Z=indgen(L1)
+  HT=BIN1*Z
+  FIL1=DPATH+DNM+'BETA_m.TXT'
+  FIL2=DPATH+DNM+'BETA_D.TXT'
+
+
+  OPENR,1,FIL1
+  READF,1, DATA1
+  HELP,DATA1
+  PLOT,DATA1[0,*],HT,color=200,background=-2,POSITION=P1,TITLE='BETA_M'
+  for I=1,r1-1  do begin
+  oplot,data1[I,*],ht,color=25
+  ;WAIT,1
+  endfor
+  CLOSE,1
+  ;;;;AVERAGE 5 FILES;;;;;;;;;;;;
+;  AX=FLTARR(R1/5,L1)
+;  N=0
+ ;  PLOT,DATA1[0,*],HT,COLOR=2,BACKGROUND=-2,POSITION=P2,XRANGE=[0,0.0004], $
+ ;  XTITLE='BACKSCATT COEFF',YTITLE='KM',TITLE=DNM
+ ;  For J=0,R1-1,5 do begin
+ ;  AX[N,*]=TOTAL(DATA1[J:J+4,*],1)/5
+
+ ;  OPLOT,AX[N,*]+N*0.0001,HT,COLOR=J+30
+  ;   N=N+1
+ ;  ENDFOR
+
+   STOP
+    DATA2=findgen(R1,L1)
+  OPENR,1,FIL2
+  READF,1, DATA2
+  READ,FNORM,PROMPT='INPUT NORMALIZATION CONSTANT D/M:'
+  PLOT,DATA2[0,*]/FNORM,HT,color=200,background=-2,POSITION=P2,TITLE='BETA_D'
+  for I=1,r1-1  do begin
+  oplot,data2[I,*]/FNORM,ht,color=25
+  ;WAIT,1
+  endfor
+  CLOSE,1
+  STOP
+  OUTFIL=DPATH+DNM+'PLOTMD.BMP
+  WRITE_BMP,OUTFIL,TVRD(/TRUE)
+  STOP
+ END

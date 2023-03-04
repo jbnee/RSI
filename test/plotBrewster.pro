@@ -1,0 +1,32 @@
+Pro plotBrewster
+;;set_plot, 'ps'
+;;device, filename='E:\RSI\TEST\Brewster.ps'
+ theta=findgen(90)*!pi/180
+ x=theta*180/!pi
+ n=1/1.5
+ r2=sqrt(n^2-sin(theta)^2)
+ rs= ((cos(theta)-r2)/(cos(theta)+r2))
+ rp=(((-n^2)*cos(theta)+r2)/((n^2)*cos(theta)+r2))
+ plot,x,rs, background=-2, color=2,xrange=[0,90], yrange=[-1,1],$
+ ;title='External Reflection', xtitle='Angle of incidence (degree)',ytitle='Reflection: s&p'
+ title='Internal Reflection', xtitle='Angle of incidence (degree)',ytitle='Reflection: s&p'
+
+  oplot,x,rp, color=4
+
+ plots,1,0
+ plots,100,0,color=5,/continue
+ AXIS, 0,0,color=2,xticks=3, xtickv=[20,40,60,80]; for central axis
+ ;xyouts,40,0.2,'Brewster Angle',color=1
+  ;xyouts,60,-0.65,'TE:s',charsize=2,color=2
+  ;xyouts,65,0.5,'TM:p',charsize=2,color=5
+   xyouts,60,0.25,'TE:s',charsize=2,color=2
+   xyouts,65,-0.5,'TM:p',charsize=2,color=5
+ stop
+;; device,/close_file
+ ;;set_plot,'win'
+ ;Image must be transpose/rotate to write_tiff as follows;
+  img1=transpose(tvrd())
+  img2=rotate(img1,3)
+  ;write_TIFF,'E:\RSI\TEST\Fresnel_intB.tif',img2
+  ;write_bmp,'c:\plot1.bmp',tvrd()
+ end

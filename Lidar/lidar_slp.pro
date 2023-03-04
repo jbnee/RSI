@@ -1,0 +1,24 @@
+pro lidar_slp
+close,/all
+datas=fltarr(2,282)
+ht=fltarr(282)
+sms=fltarr(282)
+sig=fltarr(282)
+extn=fltarr(282)
+openr,1,"d:\rsi\lidar\whdata1.txt"
+readf,1,datas
+ht=datas[0,0:280]
+sig=datas[1,0:280]
+sms=smooth(sig,10)
+;plot,sig,ht,background=-2,color=2,xrange=[0,20];psym=2
+;stop
+extn=(-0.5)*deriv(ht,sms)
+;se=smooth(extn,10)
+plot,sms,ht,background=-2,color=1;,psym=1
+stop
+plot,500*extn,ht,background=-2,color=6,psym=2;xrange=[0,50]
+smext=smooth(extn,10)
+plot,smext[0:250],ht,color=0,background=-2
+stop
+close,1
+end
