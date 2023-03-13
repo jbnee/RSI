@@ -1,5 +1,34 @@
 pro wind_field_picture
 
+ERASE,COLOR=-2
+close,/all
+device, decomposed=0
+
+!p.multi=[0,1,2]
+;!p.background=255
+; loadct,39
+plot,[0,10],[-1,1],COLOR =2,background=-2
+plot,[0,1],xrange=[0,20],yrange=[-2,2],/nodata,COLOR = 0
+oplot,[0,20],[1.5,1.5],COLOR = 50
+;start with a colour table, read in from an external file hues.dat
+rgb = bytarr(3,256)
+stop
+
+openr,2,'E:\RSI\hues.dat'
+readf,2,rgb
+close,2
+free_lun,2
+r=bytarr(256)
+g = r
+b = r
+r(0:255) = rgb(0,0:255)
+g(0:255) = rgb(1,0:255)
+b(0:255) = rgb(2,0:255)
+tvlct,r,g,b
+!P.BACKGROUND= 1 ; 0 = black, 1 = white
+!P.COLOR=2 ;blue labels
+
+
 entry_device=!d.name
 
 ;define a canvas
@@ -13,17 +42,17 @@ entry_device=!D.name
   set_plot,'ps'
 
 
-  device,filename='D:\wind_field_picture.eps',/portrait                                                 ;picture name
+  device,filename='E:\RSI\Temp\wind_field_picture.eps',/portrait                                                 ;picture name
   device,xsize=xsize,ysize=ysize,xoffset=xoffset,yoffset=yoffset,/inches,color=1,Bits_Per_Pixel=8
-  
-  
-  
+
+
+
   Longitude=fltarr(361)                                                                                 ;define length of longitude
-  Latitude=fltarr(181)                                                                                  ;define length of latitude 
+  Latitude=fltarr(181)                                                                                  ;define length of latitude
   background=fltarr(361,181)                                                                            ;define size of a parameter eg.Geophysical height, "background"
   U=fltarr(361,181)                                                                                     ;define size of zonal component of wind
   V=fltarr(361,181)                                                                                     ;define size of meridional component of wind
-  
+
   for i=0,361-1 do begin
   Longitude(i)=i*1.                                                                                       ;set longitude values
   endfor
@@ -41,8 +70,9 @@ entry_device=!D.name
   ;endif
   endfor
   endfor
-  
-  U = RANDOMN(S, 361, 181)                                                                              ;set U values      
+  stop
+
+  U = RANDOMN(S, 361, 181)                                                                              ;set U values
   V = RANDOMN(S, 361, 181)                                                                              ;set V values
 
 
@@ -63,13 +93,13 @@ print,ncolors+1,nlevels,levels
 c_levels=[a,levels,b]
 c_labels=[0,replicate(1,nlevels),0]
 c_colors=indgen(ncolors)+bottom
-loadct,33,ncolors=ncolors,bottom=bottom
+;loadct,33,ncolors=ncolors,bottom=bottom
 
 ;draw a map with a latitude range from -45 degree to 45 degree, a longitude range from -60 degree to 180 degree, with a center at (0 latitude, 60 longitude)
-;the map is draw at the position "position=[0.05,0.55,0.9,0.9]" on the canvas 
-map_set,0,60,/mercator,/isotropic,/horizon,CHARSIZE=1.2,title='NCEP Geop.Height',/noborder,limit=[-45,-60,45,180],position=[0.05,0.55,0.9,0.9]  
-
-;draw "background" on the map 
+;the map is draw at the position "position=[0.05,0.55,0.9,0.9]" on the canvas
+map_set,0,60,/mercator,/isotropic,/horizon,CHARSIZE=1.2,title='NCEP Geop.Height',/noborder,limit=[-45,-60,45,180],position=[0.05,0.55,0.9,0.9]
+stop
+;draw "background" on the map
 contour,background,longitude,latitude,levels=c_levels,c_colors=c_colors,/fill,xstyle=4,ystyle=4,font=18,/overplot
 
 ;draw isopleth
@@ -89,7 +119,7 @@ map_grid,/box,label=1
 
 ;draw wind on the map
 VELOVECT, U, V, longitude,latitude,LENGTH=2.,color=0,/overplot
-
+stop
 
 
 end

@@ -5,7 +5,7 @@ erase
 
 ;Path0='E:\Aerosol_dust\Taal_volcano\'
  path0='E:\Tonga volcano 2022\radioSound\'
- fx='91765 NSTU Pago Pago.txt'
+ fx='91765 NSTU Pago Pago Jan10_20.txt'
  ; fx='98433_May1z12_2021.txt'
  F1=path0+fx; input single CWB data file as T2003may.txt
 
