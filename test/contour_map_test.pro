@@ -13,7 +13,7 @@ oplot,[0,20],[1.5,1.5],COLOR = 50
 
 ;
 ;-----------------------------
-;start with a colour table, read in from an external file hues.dat
+  ;start with a colour table, read in from an external file hues.dat
 rgb = bytarr(3,256)
 openr,2,'E:\RSI\hues.dat'
 readf,2,rgb
@@ -27,7 +27,7 @@ g(0:255) = rgb(1,0:255)
 b(0:255) = rgb(2,0:255)
 tvlct,r,g,b
 !P.BACKGROUND= 1 ; 0 = black, 1 = white
-!P.COLOR=2 ;blue labels
+!P.COLOR=2 ;blue labe
 
 
 
@@ -60,30 +60,14 @@ tvlct,r,g,b
   V = RANDOMN(S, 361, 181)                                                                              ;set V values
 
 
-nlevels=25
-levels=fltarr(nlevels-1)
+;;;:::****
 
-a=min(background)
-b=max(background)
-
-step=(b-a)/float(nlevels)
-clevels=a+indgen(nlevels)*step
-levels(0:nlevels-2)=clevels(1:nlevels-1)
-nlevels=n_elements(levels)
-
-ncolors=nlevels+1
-bottom=1
-print,ncolors+1,nlevels,levels
-c_levels=[a,levels,b]
-c_labels=[0,replicate(1,nlevels),0]
-c_colors=indgen(ncolors)+bottom
+;;;;::****
 
 ;;;;;;;;;;;;;;;;;;;test map;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
- MAP_SET, /MERCATOR, 0, 0, /ISOTROPIC, $
-   /GRID, /CONTINENTS, $
-   TITLE = 'Simple Mercator'
+ MAP_SET, /MERCATOR,0, 0,/ISOTROPIC, /GRID, /CONTINENTS,TITLE = 'Simple Mercator'
 
 
 stop
@@ -97,7 +81,14 @@ MAP_SET, /MERCATOR, 0, -75, 90, CENTRAL_AZIMUTH=90, $
 
 
 
-stopt,33,ncolors=ncolors,bottom=bottom
+stop;,33,ncolors=ncolors,bottom=bottom
+
+MAP_SET, /SATELLITE, SAT_P=[1.0251, 55, 150], 41.5, -74., $
+   /ISOTROPIC, /HORIZON, $
+   LIMIT=[39, -74, 33, -80, 40, -77, 41,-74], $
+   /CONTINENTS, TITLE='Satellite / Tilted Perspective'
+
+
 
 ;;;************** test map ************************************
 ;draw a map with a latitude range from -45 degree to 45 degree, a longitude range from -60 degree to 180 degree, with a center at (0 latitude, 60 longitude)
@@ -123,7 +114,7 @@ map_continents,color=255,thick=5
 map_grid,/box,label=1
 
 ;draw wind on the map
-VELOVECT, U, V, longitude,latitude,LENGTH=2.,color=0,/overplot
+VELOVECT, U, V, longitude,latitude,LENGTH=2.,color=90,/overplot
 stop
 
 

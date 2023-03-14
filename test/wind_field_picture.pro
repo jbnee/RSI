@@ -1,5 +1,5 @@
 pro wind_field_picture
-
+; this pro not working
 ERASE,COLOR=-2
 close,/all
 device, decomposed=0
@@ -94,7 +94,7 @@ c_levels=[a,levels,b]
 c_labels=[0,replicate(1,nlevels),0]
 c_colors=indgen(ncolors)+bottom
 ;loadct,33,ncolors=ncolors,bottom=bottom
-
+stop
 ;draw a map with a latitude range from -45 degree to 45 degree, a longitude range from -60 degree to 180 degree, with a center at (0 latitude, 60 longitude)
 ;the map is draw at the position "position=[0.05,0.55,0.9,0.9]" on the canvas
 map_set,0,60,/mercator,/isotropic,/horizon,CHARSIZE=1.2,title='NCEP Geop.Height',/noborder,limit=[-45,-60,45,180],position=[0.05,0.55,0.9,0.9]
