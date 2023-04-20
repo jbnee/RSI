@@ -233,7 +233,7 @@ if (a_p eq 1) then wordx='photon' else wordx='Analog'
  ;read,wordx,prompt='labels: '
  ;outpath=path0+'\'
  out2=outpath+dnm+wordx+'_.png'
- write_png,outplot2,tvrd(/true)
+ write_png,out2,tvrd(/true)
 ;wait,3
 ;erase
 

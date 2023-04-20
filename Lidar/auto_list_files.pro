@@ -1,6 +1,6 @@
-Pro auro_run
+Pro auto_list_files
 ; serch number of data files in a month
-xpath='f:\Lidar_data\2009\AU\au*'
+xpath='D:\Lidar_data\2009\AU\au*'
 f=file_search(xpath)
 nf=size(f)
 s=strarr(100)  ;max file is 100

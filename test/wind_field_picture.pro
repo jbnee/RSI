@@ -1,8 +1,9 @@
 pro wind_field_picture
+;<<<<<<< HEAD
 ; this pro not working
 ERASE,COLOR=-2
 close,/all
-device, decomposed=0
+;device, decomposed=0
 
 !p.multi=[0,1,2]
 ;!p.background=255
@@ -28,6 +29,8 @@ tvlct,r,g,b
 !P.BACKGROUND= 1 ; 0 = black, 1 = white
 !P.COLOR=2 ;blue labels
 
+;=======
+;>>>>>>> parent of 767b2c5 (map plot)
 
 entry_device=!d.name
 
@@ -42,7 +45,7 @@ entry_device=!D.name
   set_plot,'ps'
 
 
-  device,filename='E:\RSI\Temp\wind_field_picture.eps',/portrait                                                 ;picture name
+  device,filename='D:\wind_field_picture.eps',/portrait                                                 ;picture name
   device,xsize=xsize,ysize=ysize,xoffset=xoffset,yoffset=yoffset,/inches,color=1,Bits_Per_Pixel=8
 
 
@@ -70,7 +73,6 @@ entry_device=!D.name
   ;endif
   endfor
   endfor
-  stop
 
   U = RANDOMN(S, 361, 181)                                                                              ;set U values
   V = RANDOMN(S, 361, 181)                                                                              ;set V values
@@ -93,12 +95,17 @@ print,ncolors+1,nlevels,levels
 c_levels=[a,levels,b]
 c_labels=[0,replicate(1,nlevels),0]
 c_colors=indgen(ncolors)+bottom
+;<<<<<<< HEAD
 ;loadct,33,ncolors=ncolors,bottom=bottom
 stop
+;=======
+;loadct,33,ncolors=ncolors,bottom=bottom
+
+;>>>>>>> parent of 767b2c5 (map plot)
 ;draw a map with a latitude range from -45 degree to 45 degree, a longitude range from -60 degree to 180 degree, with a center at (0 latitude, 60 longitude)
 ;the map is draw at the position "position=[0.05,0.55,0.9,0.9]" on the canvas
 map_set,0,60,/mercator,/isotropic,/horizon,CHARSIZE=1.2,title='NCEP Geop.Height',/noborder,limit=[-45,-60,45,180],position=[0.05,0.55,0.9,0.9]
-stop
+
 ;draw "background" on the map
 contour,background,longitude,latitude,levels=c_levels,c_colors=c_colors,/fill,xstyle=4,ystyle=4,font=18,/overplot
 
@@ -119,7 +126,7 @@ map_grid,/box,label=1
 
 ;draw wind on the map
 VELOVECT, U, V, longitude,latitude,LENGTH=2.,color=0,/overplot
-stop
+
 
 
 end

@@ -1,5 +1,5 @@
 
-Pro contour_aerosol_Ja182109
+Pro contour_aerosol_SR430
 ERASE,COLOR=-2
 close,/all
 device, decomposed=0
@@ -7,15 +7,15 @@ device, decomposed=0
 !p.multi=[0,1,2]
 ;!p.background=255
 ; loadct,39
-plot,[0,10],[-1,1],COLOR = 2,background=-2
-plot,[0,1],xrange=[0,20],yrange=[-2,2],/nodata,COLOR = 4
+plot,[0,10],[-1,1],COLOR = 0
+plot,[0,1],xrange=[0,20],yrange=[-2,2],/nodata,COLOR = 0
 oplot,[0,20],[1.5,1.5],COLOR = 50
 
 ;
 ;-----------------------------
 ;start with a colour table, read in from an external file hues.dat
 rgb = bytarr(3,256)
-openr,2,'E:\RSI\hues.dat'
+openr,2,'F:\RSI\hues.dat'
 readf,2,rgb
 close,2
 free_lun,2
@@ -46,7 +46,7 @@ tvlct,r,g,b
   dnm=''
   read,dnm,prompt='data filename as mr022018'
    month=strmid(dnm,0,2)
-   bpath='D:\Lidar_data\';   systems\depolar\'
+   bpath='F:\Lidar_data\';   systems\depolar\'
   fpath=bpath+yr+'\'+month+'\'
 
   fnm=fpath+dnm+'.'

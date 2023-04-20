@@ -38,7 +38,7 @@ filepath='E:\RSI\Tonga_Volcano\'
     P1=A[1,1:nA-1]
     T1=A[2,1:nA-1]
     help,P1,T1
-    Nx=Nx-Nx[0]
+    Nx=Nx-Nx[0]; total number of file
     mp=n_elements(P1)
     mT=n_elements(T1)
     stop
@@ -58,13 +58,13 @@ filepath='E:\RSI\Tonga_Volcano\'
    ;for iday=0,4 do begin
    ;nmin=[iday*1500,(iday+1)*1500]
    ;Px=P1[nmin[0]:nmin[1]]
-   plot,Nx,P1,color=2,background=-2,xrange=[0,1500],yrange=[630,650],xtitle='min Jan 1 ',ytitle='hPa',$
+   plot,Nx,P1,color=2,background=-2,xrange=[0,1500],yrange=[630,650],xtitle='minute Jan 1 ',ytitle='hPa',$
    title=FNMD
    ;meanP1=mean(Px)
    oplot,Nx,smp1,color=90
    stop
 
-    plot,Nx,T1[0:1500],color=2,background=-2,xrange=[0,1440],yrange=[-10,20];title='KH Temperature'
+    plot,Nx,T1[0:1500],color=2,background=-2,xrange=[0,1440],yrange=[-10,20],xtitle='Minute',ytitle='Temperature c',title='KH Temperature'
     SmT1=smooth(T1,100)
     oplot,Nx,SmT1,color=99
   ; NP1=n_elements(P1)
