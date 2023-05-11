@@ -31,23 +31,23 @@ tvlct,r,g,b
 
 
 
-  Longitude=fltarr(361)                                                                                 ;define length of longitude
-  Latitude=fltarr(181)                                                                                  ;define length of latitude
-  background=fltarr(361,181)                                                                            ;define size of a parameter eg.Geophysical height, "background"
-  U=fltarr(361,181)                                                                                     ;define size of zonal component of wind
-  V=fltarr(361,181)                                                                                     ;define size of meridional component of wind
+  Longitude=fltarr(361)        ;define length of longitude
+  Latitude=fltarr(181)          ;define length of latitude
+  background=fltarr(361,181)   ;define size of a parameter eg.Geophysical height, "background"
+  U=fltarr(361,181)             ;define size of zonal component of wind
+  V=fltarr(361,181)           ;define size of meridional component of wind
 
   for i=0,361-1 do begin
-  Longitude(i)=i*1.                                                                                       ;set longitude values
+  Longitude(i)=i*1.             ;set longitude values
   endfor
   for i=0,181-1 do begin
-  latitude(i)=i*1.-90                                                                                     ;set latitude values
+  latitude(i)=i*1.-90            ;set latitude values
   endfor
 
 
   for i=0,361-1 do begin
   for j=0,181-1 do begin
-  background(i,j)=sin(i*1./360.)+cos(j*1./180.)                                                         ;set values
+  background(i,j)=sin(i*1./360.)+cos(j*1./180.)    ;set values
  ; if(j eq 60)then begin
   U(i,j)=i*5.
   V(i,j)=j^2
@@ -56,8 +56,8 @@ tvlct,r,g,b
   endfor
   stop
 
-  U = RANDOMN(S, 361, 181)                                                                              ;set U values
-  V = RANDOMN(S, 361, 181)                                                                              ;set V values
+  U = RANDOMN(S, 361, 181)    ;set U values
+  V = RANDOMN(S, 361, 181)   ;set V values
 
 
 ;;;:::****

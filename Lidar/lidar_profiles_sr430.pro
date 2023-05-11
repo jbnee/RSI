@@ -10,7 +10,7 @@ pro lidar_profiles_SR430
 
   Read, dnm, PROMPT='Enter filename fnm as ja15;'   ; Enter date+code
    month=strmid(dnm,0,2)
-  bpath='F:\Lidar_data\';   systems\depolar\'
+  bpath='D:\Lidar_data\';   systems\depolar\'
   fpath=bpath+yr+'\'+month+'\'
 
   fnm=fpath+dnm+'.'
